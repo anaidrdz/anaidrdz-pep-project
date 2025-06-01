@@ -4,7 +4,6 @@ import DAO.MessageDAO;
 import Model.Message;
 import DAO.AccountDAO;
 import Model.Account;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -22,8 +21,7 @@ public class MessageService {
         if(message.getMessage_text() == null || 
             message.getMessage_text().isBlank() || 
             message.getMessage_text().length() > 255) 
-            {
-            
+            {    
             return null;
         }
 
@@ -31,9 +29,7 @@ public class MessageService {
         if(account == null) {
             return null;
         }
-
         return messageDAO.addNewMessage(message);
-
     }
 
     public List<Message> getAllMessages() throws SQLException{

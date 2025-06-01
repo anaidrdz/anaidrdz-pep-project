@@ -2,9 +2,7 @@ package Controller;
 
 import io.javalin.Javalin;
 import io.javalin.http.Context;
-
 import java.sql.SQLException;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import Model.Account;
@@ -22,12 +20,6 @@ public class SocialMediaController {
         this.messageService = new MessageService();
     }
 
-
-    /**
-     * In order for the test cases to work, you will need to write the endpoints in the startAPI() method, as the test
-     * suite must receive a Javalin object from this method.
-     * @return a Javalin app object which defines the behavior of the Javalin controller.
-     */
     public Javalin startAPI() {
         Javalin app = Javalin.create();
         app.post("/register", this::userRegistration);
@@ -39,11 +31,8 @@ public class SocialMediaController {
         app.patch("/messages/{message_id}", this::updateMessageById);
         app.get("/accounts/{account_id}/messages", this::getAllMessagesByAccount);
 
-
         return app;
     }
-
-    
 
     private void userRegistration(Context ctx) throws JsonProcessingException, SQLException {
         ObjectMapper mapper = new ObjectMapper();
@@ -76,7 +65,7 @@ public class SocialMediaController {
         Message message = mapper.readValue(ctx.body(), Message.class);
 
         Message successful = messageService.addNewMessage(message);
-        
+
         if (successful != null) {
             ctx.json(mapper.writeValueAsString(successful));
             ctx.status(200);
@@ -132,6 +121,4 @@ public class SocialMediaController {
         ctx.json(messageService.getAllMessagesByAccount(accountId));
         ctx.status(200);
     }
-
-
 }

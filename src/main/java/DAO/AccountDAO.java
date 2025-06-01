@@ -1,13 +1,8 @@
 package DAO;
 
 import Model.Account;
-
 import Util.ConnectionUtil;
-
-
 import java.sql.*;
-
-import org.h2.command.Prepared;
 
 public class AccountDAO {
 
@@ -38,7 +33,6 @@ public class AccountDAO {
         if(rs.next()) {
             return new Account(rs.getInt("account_id"), rs.getString("username"), rs.getString("password"));
         }
-
         return null;
     }
 
@@ -57,7 +51,6 @@ public class AccountDAO {
             int generated_account_id = (int) returnedSet.getLong(1);
             return new Account(generated_account_id, account.getUsername(), account.getPassword());
         }
-
         return null;
     }
 
@@ -75,11 +68,7 @@ public class AccountDAO {
             String userName = rs.getString("username");
             String passWord = rs.getString("password");
             return new Account(accountId, userName, passWord);
-
         }
         return null;
     }
-
-    
-    
 }

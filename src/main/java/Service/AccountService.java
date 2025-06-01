@@ -2,9 +2,7 @@ package Service;
 
 import DAO.AccountDAO;
 import Model.Account;
-
 import java.sql.SQLException;
-
 
 public class AccountService {
     public AccountDAO accountDAO;
@@ -12,7 +10,6 @@ public class AccountService {
     public AccountService() {
         accountDAO = new AccountDAO();
     }
-
 
     public Account addNewAccount(Account account) throws SQLException {
         Account exists = accountDAO.getAccountWithUserName(account.getUsername());
@@ -30,9 +27,7 @@ public class AccountService {
         if(username == null || password == null || username.isBlank() || password.isBlank()) {
             return null;
         }
-
         return accountDAO.userLogin(username, password);
     }
-
 }
 
